@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Catalog - IdleForge3D</title>
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css" rel="stylesheet">
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: #0a0a0a;
+      color: #fff;
+      overflow-x: hidden;
+    }
+    
+    /* Header */
+    .header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(10, 10, 10, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 1.2rem 0;
+      z-index: 1000;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .header-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #fff;
+      text-decoration: none;
+      letter-spacing: 1px;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    
+    .nav-links a {
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    
+    .nav-links a:hover {
+      color: #fff;
+    }
+    
+    .social-links {
+      display: flex;
+      gap: 1rem;
+    }
+    
+    .social-links a {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 1.2rem;
+      transition: color 0.3s;
+    }
+    
+    .social-links a:hover {
+      color: #fff;
+    }
+    
+    /* Hero Section */
+    .hero {
+      margin-top: 80px;
+      padding: 4rem 2rem 2rem;
+      text-align: center;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    }
+    
+    .hero h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .breadcrumbs {
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 0.9rem;
+    }
+    
+    .breadcrumbs a {
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+    }
+    
+    /* Filter Controls */
+    .filter-controls {
+      max-width: 1400px;
+      margin: 2rem auto;
+      padding: 0 2rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    
+    .filter-btn {
+      padding: 0.7rem 1.5rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.7);
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-weight: 500;
+    }
+    
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-color: transparent;
+      color: #fff;
+      transform: translateY(-2px);
+    }
+    
+    /* Gallery Grid */
+    .gallery-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+    
+    .gallery-item {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+    }
+    
+    .gallery-item:hover {
+      transform: translateY(-8px);
+      border-color: rgba(102, 126, 234, 0.5);
+      box-shadow: 0 20px 40px rgba(102, 126, 234, 0.2);
+    }
+    
+    .image-wrapper {
+      position: relative;
+      width: 100%;
+      padding-top: 100%;
+      overflow: hidden;
+      background: #1a1a2e;
+    }
+    
+    .gallery-item img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s;
+    }
+    
+    .gallery-item:hover img {
+      transform: scale(1.1);
+    }
+    
+    .image-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.8) 100%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      display: flex;
+      align-items: flex-end;
+      padding: 1.5rem;
+    }
+    
+    .gallery-item:hover .image-overlay {
+      opacity: 1;
+    }
+    
+    .item-info {
+      padding: 1.5rem;
+    }
+    
+    .category {
+      display: inline-block;
+      padding: 0.4rem 1rem;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.8rem;
+    }
+    
+    .item-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 0.8rem;
+      color: #fff;
+    }
+    
+    .item-actions {
+      display: flex;
+      gap: 0.8rem;
+      margin-top: 1rem;
+    }
+    
+    .action-btn {
+      flex: 1;
+      padding: 0.7rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      color: #fff;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: all 0.3s;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+    
+    .action-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+    
+    .action-btn.primary {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-color: transparent;
+    }
+    
+    /* Pagination */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 2rem 0 4rem;
+      list-style: none;
+    }
+    
+    .pagination a {
+      padding: 0.8rem 1.2rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      color: #fff;
+      text-decoration: none;
+      transition: all 0.3s;
+      font-weight: 500;
+    }
+    
+    .pagination a:hover,
+    .pagination a.active {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-color: transparent;
+    }
+    
+    .pagination a.disabled {
+      opacity: 0.3;
+      pointer-events: none;
+    }
+    
+    /* Footer */
+    .footer {
+      background: #0d0d0d;
+      padding: 3rem 2rem 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .footer-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+    
+    .footer-section h4 {
+      font-family: 'Montserrat', sans-serif;
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+    }
+    
+    .footer-section p,
+    .footer-section a {
+      color: rgba(255, 255, 255, 0.6);
+      line-height: 1.8;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    
+    .footer-section a:hover {
+      color: #fff;
+    }
+    
+    .copyright {
+      text-align: center;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      color: rgba(255, 255, 255, 0.4);
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+      
+      .gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1.5rem;
+      }
+      
+      .hero h1 {
+        font-size: 2rem;
+      }
+      
+      .filter-controls {
+        padding: 0 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-container">
+      <a href="index.html" class="logo">IdleForge3D</a>
+      
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html#about">About</a></li>
+          <li><a href="index.html#featured-services">Services</a></li>
+          <li><a href="#gallery">Catalog</a></li>
+        </ul>
+      </nav>
+      
+      <div class="social-links">
+        <a href="https://wa.me/916379024941"><i class="bi bi-whatsapp"></i></a>
+        <a href="https://www.instagram.com/idleforge3d/"><i class="bi bi-instagram"></i></a>
+        <a href="https://www.youtube.com/@IdleForge3D"><i class="bi bi-youtube"></i></a>
+        <a href="https://www.facebook.com/profile.php?id=61585932714661"><i class="bi bi-facebook"></i></a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <h1>Our Catalog</h1>
+    <div class="breadcrumbs">
+      <a href="index.html">Home</a> / Catalog
+    </div>
+  </section>
+
+  <!-- Filter Controls -->
+  <div class="filter-controls">
+    <button class="filter-btn active" data-filter="all">All Products</button>
+    <button class="filter-btn" data-filter="Keycaps">Keycaps</button>
+    <button class="filter-btn" data-filter="Keychain">Keychains</button>
+    <button class="filter-btn" data-filter="Accessory">Accessories</button>
+    <button class="filter-btn" data-filter="Lamps">Lamps</button>
+    <button class="filter-btn" data-filter="Games">Games</button>
+  </div>
+
+  <!-- Gallery -->
+  <div class="gallery-container">
+    <div class="gallery-grid" id="galleryGrid">
+      
+      <div class="gallery-item" data-category="Keycaps">
+        <div class="image-wrapper">
+          <img src="assets/img/MOR/re.JPG" alt="Reaper Keycap">
+        </div>
+        <div class="item-info">
+          <span class="category">Keycaps</span>
+          <h3 class="item-title">Reaper Keycap</h3>
+          <div class="item-actions">
+            <a href="assets/img/MOR/re.JPG" class="action-btn">
+              <i class="bi bi-search"></i> View
+            </a>
+            <a href="Product-page/Skull_Keycap.html" class="action-btn primary">
+              Details
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-category="Keychain">
+        <div class="image-wrapper">
+          <img src="assets/img/MOR/pikachu.JPG" alt="Pikachu Keychain">
+        </div>
+        <div class="item-info">
+          <span class="category">Keychain</span>
+          <h3 class="item-title">Pikachu Keychain</h3>
+          <div class="item-actions">
+            <a href="assets/img/MOR/pikachu.JPG" class="action-btn">
+              <i class="bi bi-search"></i> View
+            </a>
+            <a href="Product-page/pikachu.html" class="action-btn primary">
+              Details
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-category="Accessory">
+        <div class="image-wrapper">
+          <img src="assets/Temp-img/Pro_img/2.jpg" alt="SnapGuard Cable Clip">
+        </div>
+        <div class="item-info">
+          <span class="category">Accessory</span>
+          <h3 class="item-title">SnapGuard Cable Clip</h3>
+          <div class="item-actions">
+            <a href="assets/Temp-img/Pro_img/2.jpg" class="action-btn">
+              <i class="bi bi-search"></i> View
+            </a>
+            <a href="Product-page/Cable-Clip.html" class="action-btn primary">
+              Details
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-category="Keychain">
+        <div class="image-wrapper">
+          <img src="assets/Temp-img/Pro_img/3.jpg" alt="CustomID KeyTag">
+        </div>
+        <div class="item-info">
+          <span class="category">Keychains</span>
+          <h3 class="item-title">CustomID KeyTag</h3>
+          <div class="item-actions">
+            <a href="assets/Temp-img/Pro_img/4.jpg" class="action-btn">
+              <i class="bi bi-search"></i> View
+            </a>
+            <a href="Product-page/Name_Keychain.html" class="action-btn primary">
+              Details
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-category="Keychain">
+        <div class="image-wrapper">
+          <img src="assets/Temp-img/Pro_img/4.jpg" alt="Pulse NFC Keychain">
+        </div>
+        <div class="item-info">
+          <span class="category">Keychains</span>
+          <h3 class="item-title">Pulse NFC Keychain</h3>
+          <div class="item-actions">
+            <a href="assets/Temp-img/Pro_img/8.jpg" class="action-btn">
+              <i class="bi bi-search"></i> View
+            </a>
+            <a href="Product-page/NFC.html" class="action-btn primary">
+              Details
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-category="Keycaps">
+        <div class="image-wrapper">
+          <img src="assets/img/sk.JPG" alt="SocialPop Keycap">
+        </div>
+        <div class="item-info">
+          <span class="category">Keycaps</span>
+          <h3 class="item-title">SocialPop Keycap</h3>
+          <div class="item-actions">
+            <a href="assets/Temp-img/Pro_img/16.jpg" class="action-btn">
+              <i class="bi bi-search"></i> View
+            </a>
+            <a href="Product-page/Social_keycap.html" class="action-btn primary">
+              Details
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-category="Lamps">
+        <div class="image-wrapper">
+          <img src="assets/Temp-img/Pro_img/9.jpg" alt="LightFrame Portrait">
+        </div>
+        <div class="item-info">
+          <span class="category">Lamps</span>
+          <h3 class="item-title">LightFrame Portrait</h3>
+          <div class="item-actions">
+            <a href="assets/Temp-img/Pro_img/10.jpg" class="action-btn">
+              <i class="bi bi-search"></i> View
+            </a>
+            <a href="Product-page/lithophone.html" class="action-btn primary">
+              Details
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-category="Keychain">
+        <div class="image-wrapper">
+          <img src="assets/img/J-Keychain.png" alt="Jersey Keychain">
+        </div>
+        <div class="item-info">
+          <span class="category">Keychains</span>
+          <h3 class="item-title">Jersey Keychain</h3>
+          <div class="item-actions">
+            <a href="assets/img/jercy-2.jpeg" class="action-btn">
+              <i class="bi bi-search"></i> View
+            </a>
+            <a href="Product-page/J-Keychain.html" class="action-btn primary">
+              Details
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-category="Games">
+        <div class="image-wrapper">
+          <img src="assets/img/MOR/pix.JPG" alt="Pixel Box">
+        </div>
+        <div class="item-info">
+          <span class="category">Games</span>
+          <h3 class="item-title">Pixel Box</h3>
+          <div class="item-actions">
+            <a href="assets/img/MOR/pix.JPG" class="action-btn">
+              <i class="bi bi-search"></i> View
+            </a>
+            <a href="Product-page/Pixel-box.html" class="action-btn primary">
+              Details
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-category="Keychain">
+        <div class="image-wrapper">
+          <img src="assets/img/coc.png" alt="ShuttleCork Keychain">
+        </div>
+        <div class="item-info">
+          <span class="category">Keychains</span>
+          <h3 class="item-title">ShuttleCork Keychain</h3>
+          <div class="item-actions">
+            <a href="assets/Temp-img/Pro_img/18.jpg" class="action-btn">
+              <i class="bi bi-search"></i> View
+            </a>
+            <a href="Product-page/coc-keychain.html" class="action-btn primary">
+              Details
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-category="Accessory">
+        <div class="image-wrapper">
+          <img src="assets/Temp-img/Pro_img/5.jpg" alt="Drift & Arrange Organizer">
+        </div>
+        <div class="item-info">
+          <span class="category">Keyboard Keys</span>
+          <h3 class="item-title">Drift & Arrange Organizer</h3>
+          <div class="item-actions">
+            <a href="assets/Temp-img/Pro_img/5.jpg" class="action-btn">
+              <i class="bi bi-search"></i> View
+            </a>
+            <a href="Product-page/organizer.html" class="action-btn primary">
+              Details
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Pagination -->
+    <ul class="pagination" id="pagination"></ul>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>IdleForge3D</h4>
+        <p><strong>Phone:</strong> +91 63790 24941</p>
+        <p><strong>Email:</strong> idleforge3d@gmail.com</p>
+      </div>
+      <div class="footer-section">
+        <h4>Useful Links</h4>
+        <a href="index.html">Home</a>
+        <a href="index.html#about">About us</a>
+        <a href="index.html#featured-services">What We Offer</a>
+        <a href="index.html#portfolio">Catalog</a>
+      </div>
+      <div class="footer-section">
+        <h4>Our Services</h4>
+        <a href="blog.html">Custom Gifts</a>
+        <a href="service-details.html">Architectural Model</a>
+        <a href="service-details.html">Engineering Prototype</a>
+      </div>
+      <div class="footer-section">
+        <h4>Follow Us</h4>
+        <div class="social-links" style="margin-top: 1rem;">
+          <a href="https://www.youtube.com/@IdleForge3D"><i class="bi bi-youtube"></i></a>
+          <a href="https://www.facebook.com/profile.php?id=61585932714661"><i class="bi bi-facebook"></i></a>
+          <a href="https://www.instagram.com/idleforge3d/"><i class="bi bi-instagram"></i></a>
+          <a href="https://wa.me/916379024941"><i class="bi bi-whatsapp"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="copyright">
+      <p>© 2025 Copyright IdleForge3D - All Rights Reserved</p>
+      <p>Designed by <a href="https://www.instagram.com/astroweb3.dev/" style="display: inline; color: rgba(255,255,255,0.6);">Astro.dev</a></p>
+    </div>
+  </footer>
+
+  <script>
+    // Filter functionality
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.getAttribute('data-filter');
+        
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        
+        galleryItems.forEach(item => {
+          if (filter === 'all' || item.getAttribute('data-category') === filter) {
+            item.style.display = 'block';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+        
+        showPage(1);
+      });
+    });
+    
+    // Pagination
+    const itemsPerPage = 12;
+    const pagination = document.getElementById('pagination');
+    let currentPage = 1;
+    
+    function getVisibleItems() {
+      return Array.from(galleryItems).filter(item => item.style.display !== 'none');
+    }
+    
+    function showPage(page) {
+      const visibleItems = getVisibleItems();
+      const totalPages = Math.ceil(visibleItems.length / itemsPerPage);
+      currentPage = Math.min(page, totalPages);
+      
+      const start = (currentPage - 1) * itemsPerPage;
+      const end = start + itemsPerPage;
+      
+      visibleItems.forEach((item, i) => {
+        if (i >= start && i < end) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+      
+      renderPagination();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    
+    function renderPagination() {
+      const visibleItems = getVisibleItems();
+      const totalPages = Math.ceil(visibleItems.length / itemsPerPage);
+      pagination.innerHTML = '';
+      
+      if (totalPages <= 1) return;
+      
+      pagination.innerHTML += `<li><a href="#" class="${currentPage === 1 ? 'disabled' : ''}" onclick="event.preventDefault(); if(currentPage > 1) showPage(currentPage - 1)">«</a></li>`;
+      
+      for (let i = 1; i <= totalPages; i++) {
+        pagination.innerHTML += `<li><a href="#" class="${i === currentPage ? 'active' : ''}" onclick="event.preventDefault(); showPage(${i})">${i}</a></li>`;
+      }
+      
+      pagination.innerHTML += `<li><a href="#" class="${currentPage === totalPages ? 'disabled' : ''}" onclick="event.preventDefault(); if(currentPage < ${totalPages}) showPage(currentPage + 1)">»</a></li>`;
+    }
+    
+    showPage(1);
+  </script>
+
+</body>
+</html>

@@ -547,6 +547,7 @@ h6 {
 
 .footer .footer-links {
   margin-bottom: 30px;
+  text-align: left;
 }
 
 .footer .footer-links ul {
@@ -586,6 +587,7 @@ h6 {
   color: var(--heading-color);
   font-size: 24px;
   font-weight: 600;
+  text-align: left;
   font-family: var(--heading-font);
 }
 
@@ -1925,6 +1927,7 @@ section,
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
   padding: 30px;
   height: 100%;
+  text-align: left;
   border-radius: 10px;
   overflow: hidden;
 }
@@ -2836,7 +2839,7 @@ section,
         /* Info display */
         .info {
             position: absolute;
-            top: 320em;
+            top: 300em;
             left: 50%;
             transform: translateX(-50%);
             color: #111;
@@ -2848,7 +2851,7 @@ section,
         /* Mobile adjustment */
         @media (max-width: 768px) {
             .info {
-                top: 920em; /* adjust for smaller screen */
+                top: 895em; /* adjust for smaller screen */
                 font-size: 0.6rem; /* optional scaling */
             }
             .info p {
@@ -2859,7 +2862,7 @@ section,
 
         @media (max-width: 480px) {
             .info {
-                top: 920em; /* further adjust */
+                top: 895em; /* further adjust */
             }
             .info p {
               font-size: 14px;
@@ -3435,3 +3438,147 @@ section,
 .portfolio-bbxx{
   width: 50%;
 }
+
+.footer-about{
+  text-align: left;
+}
+
+.footer-links{
+  text-align: left;
+}
+
+
+
+
+.btn-get-started9 {
+  color: #000;
+  background-color: #d14648;
+  font-family: "Mine", sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  letter-spacing: 1px;
+  display: inline-block;
+  text-transform: uppercase;
+  padding: 12px 40px;
+  margin: 30px 0 0 0;
+  border-radius: 4px;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: 0.5s;
+}
+
+.btn-get-started9:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.25);
+}
+
+/* Glossy overlay on hover */
+.btn-get-started9:hover::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0.6) 0%,
+    #ffffff44 40%,
+    transparent 100%
+  );
+  transform: skewX(-25deg);
+  animation: shine 0.9s forwards;
+  border-radius: inherit;
+}
+
+@keyframes shine {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+
+
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.image-grid a {
+  display: block;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.image-grid img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  aspect-ratio: 1 / 1;
+  transition: transform 0.4s ease;
+}
+
+.image-grid a:hover img {
+  transform: scale(1.08);
+}
+
+
+
+ .gallery-item {
+      position: relative;
+      border-radius: 10px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+    }
+    
+    .gallery-item:hover {
+      transform: translateY(-8px);
+      border-color: rgba(255, 0, 0, 0.5);
+      box-shadow: 
+        0 10px 30px rgba(0, 0, 0, 0.8),
+        0 0 40px rgba(255, 0, 0, 0.4),
+        0 0 60px rgba(255, 0, 0, 0.2);
+    }
+    
+    /* .image-wrapper {
+      position: relative;
+      width: 100%;
+      padding-top: 100%;
+      overflow: hidden;
+      background: #1a1a2e;
+    }
+     */
+    /* .gallery-item img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s;
+    } */
+    
+    .gallery-item:hover img {
+      transform: scale(1.1);
+    }
+    
+    .image-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.8) 100%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      display: flex;
+      align-items: flex-end;
+      padding: 1.5rem;
+    }
+    
+    .gallery-item:hover .image-overlay {
+      opacity: 1;
+    }
