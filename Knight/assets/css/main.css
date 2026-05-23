@@ -789,6 +789,16 @@ section,
   /* z-index: -1;  */
 }
 
+.hero-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* makes sure the video fills the container */
+  /* z-index: -1;  */
+}
+
 .hero .overlay {
   position: absolute;
   top: 0;
@@ -869,6 +879,17 @@ section,
   .hero h2 {
     font-size: 32px;
   }
+
+  .hero-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 50%;
+  object-fit: cover; /* makes sure the video fills the container */
+  /* z-index: -1;  */
+}
+
 
   .hero p {
     font-size: 18px;
