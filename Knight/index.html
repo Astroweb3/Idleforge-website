@@ -1382,11 +1382,11 @@ function updateCoverflow() {
   items.forEach((item, i) => {
     const offset = i - currentIndex;
     const scale = i === currentIndex ? 1 : 0.8;
-    const translateX = offset * 300; // spacing between slides
+    const translateX = offset * 300;
 
-    // Move from the center using translateX(-50% + offset)
     item.style.left = '50%';
-    item.style.transform = `translateX(calc(-50% + ${translateX}px)) scale(${scale})`;
+    item.style.transform =
+      `translateX(calc(-50% + ${translateX}px)) scale(${scale})`;
 
     item.style.zIndex = i === currentIndex ? 10 : 1;
     item.style.opacity = i === currentIndex ? 1 : 0.6;
@@ -1395,9 +1395,6 @@ function updateCoverflow() {
   dotsContainer.querySelectorAll('.dot').forEach((dot, i) => {
     dot.classList.toggle('active', i === currentIndex);
   });
-
-  title.textContent = infoData[currentIndex].title;
-  description.textContent = infoData[currentIndex].desc;
 }
 
 function navigate(direction) {
@@ -1481,7 +1478,7 @@ updateCoverflow();
     setInterval(createParticles, 3000);
 
     updateCoverflow();
-    container.focus();
+    
     startAutoplay();
 </script>
 
