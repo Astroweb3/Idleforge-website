@@ -3603,3 +3603,173 @@ section,
     .gallery-item:hover .image-overlay {
       opacity: 1;
     }
+
+/*--------------------------------------------------------------
+# New Arrival Section
+--------------------------------------------------------------*/
+.na-featured {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  align-items: stretch;
+  gap: 0;
+  border-radius: 20px;
+  overflow: hidden;
+  background: linear-gradient(160deg, #2c2c2c 0%, #1a1a1a 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  min-height: 420px;
+  margin-bottom: 25px;
+}
+
+.na-featured-img-wrap {
+  position: relative;
+  overflow: hidden;
+  background: #111;
+}
+
+.na-featured-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  animation: naFadeIn 0.5s ease;
+}
+
+.na-featured .new-badge {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 5;
+  background: linear-gradient(135deg, #df1529, #ff4d5e);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 6px 16px;
+  border-radius: 50px;
+  box-shadow: 0 4px 10px rgba(223, 21, 41, 0.5);
+}
+
+.na-featured-body {
+  padding: 45px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.na-featured-body h3 {
+  font-size: 30px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 15px;
+  animation: naFadeIn 0.5s ease;
+}
+
+.na-featured-body p {
+  font-size: 15px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.65);
+  margin-bottom: 25px;
+  animation: naFadeIn 0.6s ease;
+}
+
+.na-btn-lg {
+  display: inline-block;
+  align-self: center;
+  padding: 12px 32px;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: #fff;
+  background: #df1529;
+  border: 1px solid #df1529;
+  transition: all 0.3s ease;
+}
+
+.na-btn-lg:hover {
+  background: transparent;
+  color: #fff;
+  box-shadow: 0 0 0 2px #df1529 inset;
+}
+
+@keyframes naFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Thumbnail strip */
+.na-thumbs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.na-thumb {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid transparent;
+  background: #1c1c1c;
+  transition: all 0.3s ease;
+}
+
+.na-thumb img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  display: block;
+  opacity: 0.6;
+  transition: all 0.3s ease;
+}
+
+.na-thumb span {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 8px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(180deg, transparent, rgba(0,0,0,0.85));
+  text-align: center;
+}
+
+.na-thumb:hover {
+  transform: translateY(-4px);
+}
+
+.na-thumb:hover img {
+  opacity: 0.85;
+}
+
+.na-thumb.active {
+  border-color: #df1529;
+  box-shadow: 0 8px 20px rgba(223, 21, 41, 0.4);
+}
+
+.na-thumb.active img {
+  opacity: 1;
+}
+
+@media (max-width: 992px) {
+  .na-featured {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+  .na-featured-img-wrap {
+    aspect-ratio: 16 / 10;
+  }
+  .na-featured-body {
+    padding: 30px 25px;
+  }
+}
+
+@media (max-width: 576px) {
+  .na-thumbs {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

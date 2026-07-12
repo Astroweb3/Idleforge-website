@@ -185,8 +185,82 @@
     </section><!-- /Call To Action Section -->
     
 
+<!-- New Arrival section-->
+<section id="New-Arrival" class="new-arrival section dark-background">
+  <div class="vline"></div>
+  <div class="vline"></div>
+  <div class="vline"></div>
+
+  <div class="container section-title" data-aos="fade-up">
+    <h2>New Arrivals</h2>
+    <p>Fresh off the printer, straight into your cart</p>
+  </div>
+
+  <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+    <!-- Featured big product -->
+    <div class="na-featured" id="naFeatured">
+      <div class="na-featured-img-wrap">
+        <span class="new-badge">New</span>
+        <img src="assets/img/1/s4.webp" alt="TrackTag" id="naFeaturedImg">
+      </div>
+      <div class="na-featured-body">
+        <h3 id="naFeaturedTitle">Waypoint mini</h3>
+        <p id="naFeaturedDesc">Turn your unforgettable journeys into a keepsake you can carry anywhere. TrailTag transforms your favorite running, cycling, hiking, or adventure routes into a unique 3D printed keychain that captures the path you conquered.
+
+Whether it's your first race, a personal best, a memorable ride, or a special trail, TrailTag preserves that moment in a personalized piece designed just for you.
+</p>
+        <a href="Product-page/Waypoint.html" class="na-btn-lg" id="naFeaturedLink">View Details</a>
+      </div>
+    </div>
+
+    <!-- Thumbnail strip -->
+    <div class="na-thumbs">
+
+      <div class="na-thumb active"
+           data-img="assets/img/1/s4.webp"
+           data-title="Waypoint mini"
+           data-desc="Turn your unforgettable journeys into a keepsake you can carry anywhere. TrailTag transforms your favorite running, cycling, hiking, or adventure routes into a unique 3D printed keychain that captures the path you conquered."
+           data-link="Product-page/Waypoint.html">
+        <img src="assets/img/1/s4.webp" alt="TrackTag">
+        <span>Waypoint mini</span>
+      </div>
+
+      <div class="na-thumb"
+           data-img="assets/img/1/New/dumbbell.webp"
+           data-title="Dumbbell Keychain"
+           data-desc="Compact gym-inspired everyday carry piece, tough enough for daily use on your keys or bag."
+           data-link="Product-page/dumbbel-keychain.html">
+        <img src="assets/img/1/New/dumbbell.webp" alt="Dumbbell Keychain">
+        <span>Dumbbell Keychain</span>
+      </div>
+
+      <div class="na-thumb"
+           data-img="assets/img/1/MOR/pix.webp"
+           data-title="Pixel Box"
+           data-desc="Retro-styled storage box with pixel accents, perfect for small desk essentials and trinkets."
+           data-link="Product-page/Pixel-box.html">
+        <img src="assets/img/1/MOR/pix.webp" alt="Pixel Box">
+        <span>Pixel Box</span>
+      </div>
+
+      <div class="na-thumb"
+           data-img="assets/Temp-img/Pro_img/2.webp"
+           data-title="SnapGuard Cable Clip"
+           data-desc="Keep your desk cables tidy and snag-free with this sleek clip-on organizer."
+           data-link="Product-page/Cable-Clip.html">
+        <img src="assets/Temp-img/Pro_img/2.webp" alt="SnapGuard Cable Clip">
+        <span>SnapGuard Clip</span>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+<!-- /New Arrival section -->
+
     <!-- Portfolio Section -->
-    <section id="portfolio" class="portfolio section scroll-light-section"> ">
+    <section id="portfolio" class="portfolio section scroll-light-section"> "
       <div class="vline"></div>
       <div class="vline"></div>
       <div class="vline"></div>
@@ -210,11 +284,11 @@
           <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
 
             <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-keycaps">
-              <img src="assets/img/1/MOR/re.webp" class="catalog-img" alt="">
+              <img src="assets/img/1/s4.webp" class="catalog-img" alt="">
               <div class="portfolio-info">
-                <h4>Reaper Keycap</h4>
+                <h4>TrackTag</h4>
                 <div class = "portfolio-actions">
-                  <a href="assets/img/1/MOR/re.webp" class="zoom-btn glightbox"
+                  <a href="assets/img/1/s4.webp" class="zoom-btn glightbox"
                       data-gallery="portfolio-gallery-app">
                         <i class="bi bi-search"></i>
                   </a>
@@ -273,7 +347,7 @@
                             data-gallery="portfolio-gallery-app">
                               <i class="bi bi-search"></i>
                           </a>
-                      <a href="Product-page/dumbbell-keychain.html" class="details-btn">
+                      <a href="Product-page/dumbbel-keychain.html" class="details-btn">
                         Details
                     </a>
                     
@@ -821,15 +895,11 @@
       </div>
 
     </section> -->
- <section id="home" class="section">
+ <section id="made-on-request" class="section">
       
-
+  
        <div class="coverflow-wrapper">
-            <div class="info section-title">
-               <h2>Made On Request</h2>
-               <p>• Limited Production item •</p>
-            </div>
-
+        
             <div class="coverflow-container" tabindex="0">
                 <div class="coverflow" id="coverflow">
 
@@ -1606,7 +1676,29 @@ updateCoverflow();
     startAutoplay();
 </script>
 
-  
+  <script>
+  const naThumbs = document.querySelectorAll('.na-thumb');
+  const naFeaturedImg = document.getElementById('naFeaturedImg');
+  const naFeaturedTitle = document.getElementById('naFeaturedTitle');
+  const naFeaturedDesc = document.getElementById('naFeaturedDesc');
+  const naFeaturedLink = document.getElementById('naFeaturedLink');
+
+  naThumbs.forEach(thumb => {
+    thumb.addEventListener('click', () => {
+      naThumbs.forEach(t => t.classList.remove('active'));
+      thumb.classList.add('active');
+
+      naFeaturedImg.style.opacity = 0;
+      setTimeout(() => {
+        naFeaturedImg.src = thumb.dataset.img;
+        naFeaturedTitle.textContent = thumb.dataset.title;
+        naFeaturedDesc.textContent = thumb.dataset.desc;
+        naFeaturedLink.href = thumb.dataset.link;
+        naFeaturedImg.style.opacity = 1;
+      }, 150);
+    });
+  });
+</script>
 </body>
 
 </html>
